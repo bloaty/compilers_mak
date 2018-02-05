@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+repositories {
+    jcenter()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.bloaty.wci.Main'
+    }
+}
+
+shadowJar {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+    manifest {
+        from rootProject.tasks.jar.manifest
+    }
+}
+
+dependencies {
+    //compile 'com.google.guava:guava:23.0'
+    //compile group: 'commons-cli', name: 'commons-cli', version: 'latest.release'
+    //compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: 'latest.release'
+}
+
+mainClassName = 'org.bloaty.wci.Main'
