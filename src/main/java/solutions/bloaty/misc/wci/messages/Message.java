@@ -3,7 +3,7 @@ package solutions.bloaty.misc.wci.messages;
 public final class Message<T extends Message.Type> {
 
     private final Class<T> type;
-    private final Body body; // TODO: refine
+    private final Body body;
 
     private Message(Class<T> type, Body body) {
         this.type = type;
@@ -33,11 +33,14 @@ public final class Message<T extends Message.Type> {
         }
     }
 
-    public interface Type {}
-    public interface ErrorType extends Type {}
-    public interface WarningType extends Type {}
-    public interface InfoType extends Type {}
-    public interface DebugType extends Type {}
+    public interface Type {
+        public interface Fatal extends Type { }
+        public interface Error extends Type { }
+        public interface Warning extends Type { }
+        public interface Info extends Type { }
+        public interface Debug extends Type { }
+        public interface Trace extends Type { }
+    }
 
     public interface Builder<T extends Type> {
         default Message<T> build() {

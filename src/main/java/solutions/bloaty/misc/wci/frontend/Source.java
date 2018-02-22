@@ -29,10 +29,10 @@ public abstract class Source implements AutoCloseable, MessageProducer {
                 return EOF;
             }
             currentLine = new Line(line, 1);
-            sendMessage(SourceLineMessage.Builder.create()
-                                                 .setLine(line)
-                                                 .setLineNumber(currentLine.lineNum)
-                                                 .build());
+            sendMessage(SourceLineMessage.builder()
+                                         .setLine(line)
+                                         .setLineNumber(currentLine.lineNum)
+                                         .build());
             return currentChar();
         }
         return currentLine.currentChar();
@@ -53,10 +53,10 @@ public abstract class Source implements AutoCloseable, MessageProducer {
                 return EOF;
             }
             currentLine = new Line(line, currentLine.lineNum + 1);
-            sendMessage(SourceLineMessage.Builder.create()
-                                                 .setLine(line)
-                                                 .setLineNumber(currentLine.lineNum)
-                                                 .build());
+            sendMessage(SourceLineMessage.builder()
+                                         .setLine(line)
+                                         .setLineNumber(currentLine.lineNum)
+                                         .build());
             return c;
         }
 
