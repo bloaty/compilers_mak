@@ -1,6 +1,6 @@
-package solutions.bloaty.misc.wci.frontend;
+package solutions.bloaty.misc.wci.api.frontend;
 
-import solutions.bloaty.misc.wci.frontend.tokens.Token;
+import solutions.bloaty.misc.wci.api.frontend.tokens.Token;
 
 import java.io.IOException;
 import java.text.ParseException;

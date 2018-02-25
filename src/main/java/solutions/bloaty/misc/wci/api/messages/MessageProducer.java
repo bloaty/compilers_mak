@@ -1,4 +1,4 @@
-package solutions.bloaty.misc.wci.messages;
+package solutions.bloaty.misc.wci.api.messages;
 
 public interface MessageProducer {
 

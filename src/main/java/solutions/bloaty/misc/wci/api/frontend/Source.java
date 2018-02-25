@@ -1,7 +1,7 @@
-package solutions.bloaty.misc.wci.frontend;
+package solutions.bloaty.misc.wci.api.frontend;
 
-import solutions.bloaty.misc.wci.messages.*;
-import solutions.bloaty.misc.wci.messages.types.SourceLineMessage;
+import solutions.bloaty.misc.wci.api.messages.*;
+import solutions.bloaty.misc.wci.api.messages.types.SourceLineMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package solutions.bloaty.misc.wci.messages;
+package solutions.bloaty.misc.wci.api.messages;
 
 import java.util.ArrayList;
 import java.util.List;

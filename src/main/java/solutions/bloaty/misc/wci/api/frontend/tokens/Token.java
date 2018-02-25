@@ -1,6 +1,6 @@
-package solutions.bloaty.misc.wci.frontend.tokens;
+package solutions.bloaty.misc.wci.api.frontend.tokens;
 
-import solutions.bloaty.misc.wci.frontend.Source;
+import solutions.bloaty.misc.wci.api.frontend.Source;
 
 public interface Token {
 

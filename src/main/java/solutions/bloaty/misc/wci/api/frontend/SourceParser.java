@@ -1,12 +1,12 @@
-package solutions.bloaty.misc.wci.frontend;
+package solutions.bloaty.misc.wci.api.frontend;
 
-import solutions.bloaty.misc.wci.messages.Message;
-import solutions.bloaty.misc.wci.messages.MessageHandler;
-import solutions.bloaty.misc.wci.messages.MessageListener;
-import solutions.bloaty.misc.wci.messages.MessageProducer;
-import solutions.bloaty.misc.wci.frontend.tokens.Token;
-import solutions.bloaty.misc.wci.middle.IntermediateCode;
-import solutions.bloaty.misc.wci.middle.SymbolTable;
+import solutions.bloaty.misc.wci.api.messages.Message;
+import solutions.bloaty.misc.wci.api.messages.MessageHandler;
+import solutions.bloaty.misc.wci.api.messages.MessageListener;
+import solutions.bloaty.misc.wci.api.messages.MessageProducer;
+import solutions.bloaty.misc.wci.api.frontend.tokens.Token;
+import solutions.bloaty.misc.wci.api.middle.IntermediateCode;
+import solutions.bloaty.misc.wci.api.middle.SymbolTable;
 
 import java.text.ParseException;
 
