@@ -23,6 +23,7 @@ local.properties
 gradle/
 gradlew
 *.bat
+out/
 
 # External tool builders
 .externalToolBuilders/
