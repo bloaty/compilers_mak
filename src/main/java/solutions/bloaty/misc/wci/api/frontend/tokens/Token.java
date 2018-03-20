@@ -2,7 +2,7 @@ package solutions.bloaty.misc.wci.api.frontend.tokens;
 
 import solutions.bloaty.misc.wci.api.frontend.Source;
 
-public interface Token {
+public interface Token<T extends TokenType> {
 
 //    private final Source source;
 //    private final String text;
@@ -19,12 +19,8 @@ public interface Token {
 //        this.linePosition = linePosition;
 //        this.type = type;
 //    }
-
+    T getType();
     Source getSource();
-    String getText();
-    Object getValue();
     int getLineNumber();
     int getLinePosition();
-    TokenType getType();
-
 }

@@ -30,7 +30,7 @@ public abstract class Backend implements MessageProducer {
     }
 
     @Override
-    public boolean sendMessage(Message message) {
+    public <T extends Message.Type> boolean sendMessage(Message<T> message) {
         return messageHandler.sendMessage(message);
     }
 

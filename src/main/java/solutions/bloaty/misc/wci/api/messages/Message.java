@@ -22,7 +22,7 @@ public final class Message<T extends Message.Type> {
             this.name = name;
             this.value = value;
         }
-        public static <T> Field of(String name, T value) {
+        public static <T> Field<T> of(String name, T value) {
             return new Field<>(name, value);
         }
         public String name() {

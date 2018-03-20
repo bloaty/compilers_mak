@@ -1,14 +1,15 @@
 package solutions.bloaty.misc.wci.api.frontend;
 
+import java.io.IOException;
+import java.text.ParseException;
+
+import solutions.bloaty.misc.wci.api.frontend.tokens.RawToken;
 import solutions.bloaty.misc.wci.api.messages.Message;
 import solutions.bloaty.misc.wci.api.messages.MessageHandler;
 import solutions.bloaty.misc.wci.api.messages.MessageListener;
 import solutions.bloaty.misc.wci.api.messages.MessageProducer;
-import solutions.bloaty.misc.wci.api.frontend.tokens.Token;
 import solutions.bloaty.misc.wci.api.middle.IntermediateCode;
 import solutions.bloaty.misc.wci.api.middle.SymbolTable;
-
-import java.text.ParseException;
 
 public abstract class SourceParser implements MessageProducer {
 
@@ -28,15 +29,15 @@ public abstract class SourceParser implements MessageProducer {
         this.intermediateCode = null;
     }
 
-    public abstract void parse() throws ParseException;
+    public abstract void parse() throws ParseException, IOException;
 
     public abstract int getErrorCount();
 
-    public final Token currentToken() {
+    public final RawToken currentToken() {
         return sourceScanner.currentToken();
     }
 
-    public Token nextToken() throws ParseException {
+    public RawToken nextToken() throws ParseException, IOException {
         return sourceScanner.nextToken();
     }
 
@@ -51,7 +52,7 @@ public abstract class SourceParser implements MessageProducer {
     }
 
     @Override
-    public boolean sendMessage(Message message) {
+    public <T extends Message.Type> boolean sendMessage(Message<T> message) {
         return messageHandler.sendMessage(message);
     }
 

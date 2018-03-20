@@ -19,11 +19,11 @@ public abstract class MessageHandler {
         return listeners.remove(listener);
     };
 
-    public boolean sendMessage(Message message) {
+    public <T extends Message.Type> boolean sendMessage(Message<T> message) {
         return notifyListeners(message);
     };
 
-    private boolean notifyListeners(Message message) {
+    private <T extends Message.Type> boolean notifyListeners(Message<T> message) {
         boolean ret = true;
         for (int i = 0; i < listeners.size(); i++) {
             boolean result = listeners.get(i).messageReceived(message);

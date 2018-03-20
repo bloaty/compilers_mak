@@ -1,36 +1,26 @@
 package solutions.bloaty.misc.wci.api.frontend;
 
-import solutions.bloaty.misc.wci.api.frontend.tokens.Token;
+import solutions.bloaty.misc.wci.api.frontend.tokens.RawToken;
+import solutions.bloaty.misc.wci.api.frontend.tokens.Tokenizer;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public abstract class SourceScanner {
-
     private final Source source;
-    private Token currentToken;
+    private RawToken currentToken;
+    private final Tokenizer tokenizer;
 
-    public SourceScanner(Source source) {
+    public SourceScanner(Source source, Tokenizer tokenizer) {
         this.source = source;
+        this.tokenizer = tokenizer;
     }
 
-    public Token currentToken() {
+    public RawToken currentToken() {
         return currentToken;
     }
 
-    public Token nextToken() throws ParseException {
-        currentToken = extractToken();
+    public RawToken nextToken() throws IOException {
+        currentToken = tokenizer.extract(source);
         return currentToken;
     }
-
-    protected abstract Token extractToken() throws ParseException;
-
-    private char currentChar() throws IOException {
-        return source.currentChar();
-    }
-
-    private char nextChar() throws IOException {
-        return source.nextChar();
-    }
-
 }

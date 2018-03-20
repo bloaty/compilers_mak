@@ -1,11 +1,14 @@
 package solutions.bloaty.misc.wci.api.frontend;
 
-import solutions.bloaty.misc.wci.api.messages.*;
-import solutions.bloaty.misc.wci.api.messages.types.SourceLineMessage;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+
+import solutions.bloaty.misc.wci.api.messages.Message;
+import solutions.bloaty.misc.wci.api.messages.MessageHandler;
+import solutions.bloaty.misc.wci.api.messages.MessageListener;
+import solutions.bloaty.misc.wci.api.messages.MessageProducer;
+import solutions.bloaty.misc.wci.api.messages.types.SourceLineMessage;
 
 public abstract class Source implements AutoCloseable, MessageProducer {
 
@@ -30,9 +33,9 @@ public abstract class Source implements AutoCloseable, MessageProducer {
             }
             currentLine = new Line(line, 1);
             sendMessage(SourceLineMessage.builder()
-                                         .setLine(line)
-                                         .setLineNumber(currentLine.lineNum)
-                                         .build());
+                    .setLine(line)
+                    .setLineNumber(currentLine.lineNumber)
+                    .build());
             return currentChar();
         }
         return currentLine.currentChar();
@@ -52,11 +55,11 @@ public abstract class Source implements AutoCloseable, MessageProducer {
                 currentLine = null;
                 return EOF;
             }
-            currentLine = new Line(line, currentLine.lineNum + 1);
+            currentLine = new Line(line, currentLine.lineNumber + 1);
             sendMessage(SourceLineMessage.builder()
-                                         .setLine(line)
-                                         .setLineNumber(currentLine.lineNum)
-                                         .build());
+                    .setLine(line)
+                    .setLineNumber(currentLine.lineNumber)
+                    .build());
             return c;
         }
 
@@ -74,14 +77,15 @@ public abstract class Source implements AutoCloseable, MessageProducer {
         return currentLine.peekChar();
     }
 
-    public int getCurrentLineNumber() {
-        return currentLine.lineNum;
+    public int lineNumber() {
+        return currentLine.lineNumber;
     }
 
-    public int getCurrentPosition() {
-        return currentLine.linePos;
+    public int currentPosition() {
+        return currentLine.linePosition;
     }
 
+    @Override
     public void close() throws IOException {
         if (reader != null) {
             try {
@@ -104,40 +108,40 @@ public abstract class Source implements AutoCloseable, MessageProducer {
     }
 
     @Override
-    public boolean sendMessage(Message message) {
+    public <T extends Message.Type> boolean sendMessage(Message<T> message) {
         return messageHandler.sendMessage(message);
     }
 
     private static final class Line {
 
         private final char[] line;
-        private final int lineLen;
-        private final int lineNum;
-        private int linePos;
+        private final int lineLength;
+        private final int lineNumber;
+        private int linePosition;
 
-        private Line(final String line, final int lineNum) {
-            this(line.toCharArray(), lineNum);
+        private Line(final String line, final int lineNumber) {
+            this(line.toCharArray(), lineNumber);
         }
 
-        private Line(final char[] line, final int lineNum) {
+        private Line(final char[] line, final int lineNumber) {
             this.line = line;
-            this.lineLen = line.length;
-            this.lineNum = lineNum;
-            this.linePos = 0;
+            this.lineLength = line.length;
+            this.lineNumber = lineNumber;
+            this.linePosition = 0;
         }
 
         private char currentChar() {
-            return (linePos < lineLen) ? line[linePos] : Source.EOL;
+            return (linePosition < lineLength) ? line[linePosition] : Source.EOL;
         }
 
         private char nextChar() {
             char c = currentChar();
-            linePos++;
+            linePosition++;
             return c;
         }
 
         private char peekChar() {
-            return (linePos + 1 < lineLen) ? line[linePos + 1] : Source.EOL;
+            return (linePosition + 1 < lineLength) ? line[linePosition + 1] : Source.EOL;
         }
 
     }

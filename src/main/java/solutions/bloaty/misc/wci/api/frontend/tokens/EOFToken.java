@@ -2,22 +2,22 @@ package solutions.bloaty.misc.wci.api.frontend.tokens;
 
 import solutions.bloaty.misc.wci.api.frontend.Source;
 
-public final class EOFToken implements Token {
+public final class EOFToken implements RawToken<TokenType.Raw> {
 
     private final Source source;
-    private final String text;
     private final Object value;
     private final int lineNumber;
     private final int linePosition;
-    private final TokenType type;
 
-    public EOFToken(Source source, int lineNumber, int linePosition, TokenType tokenType) {
+    private EOFToken(Source source, int lineNumber, int linePosition) {
         this.source = source;
         this.lineNumber = lineNumber;
         this.linePosition = linePosition;
-        this.type = tokenType;
-        this.text = "";
         this.value = null;
+    }
+
+    public static EOFToken at(Source source, int lineNumber, int linePosition) {
+        return new EOFToken(source, lineNumber, linePosition);
     }
 
     @Override
@@ -26,13 +26,8 @@ public final class EOFToken implements Token {
     }
 
     @Override
-    public String getText() {
-        return text;
-    }
-
-    @Override
-    public Object getValue() {
-        return value;
+    public char[] getChars() {
+        return new char[] {Source.EOF};
     }
 
     @Override
@@ -46,7 +41,8 @@ public final class EOFToken implements Token {
     }
 
     @Override
-    public TokenType getType() {
-        return type;
+    public TokenType.Raw getType() {
+        return CommonRawTokenTypes.EOF;
     }
+
 }
