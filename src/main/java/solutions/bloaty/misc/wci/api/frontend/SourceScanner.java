@@ -1,13 +1,14 @@
 package solutions.bloaty.misc.wci.api.frontend;
 
-import solutions.bloaty.misc.wci.api.frontend.tokens.RawToken;
-import solutions.bloaty.misc.wci.api.frontend.tokens.Tokenizer;
-
 import java.io.IOException;
+
+import solutions.bloaty.misc.wci.api.frontend.tokens.RawToken;
+import solutions.bloaty.misc.wci.api.frontend.tokens.TokenType;
+import solutions.bloaty.misc.wci.api.frontend.tokens.Tokenizer;
 
 public abstract class SourceScanner {
     private final Source source;
-    private RawToken currentToken;
+    private RawToken<TokenType.Raw> currentToken;
     private final Tokenizer tokenizer;
 
     public SourceScanner(Source source, Tokenizer tokenizer) {
@@ -15,11 +16,11 @@ public abstract class SourceScanner {
         this.tokenizer = tokenizer;
     }
 
-    public RawToken currentToken() {
+    public RawToken<TokenType.Raw> currentToken() {
         return currentToken;
     }
 
-    public RawToken nextToken() throws IOException {
+    public RawToken<TokenType.Raw> nextToken() throws IOException {
         currentToken = tokenizer.extract(source);
         return currentToken;
     }

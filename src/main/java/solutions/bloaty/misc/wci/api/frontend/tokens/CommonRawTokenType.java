@@ -1,6 +1,6 @@
 package solutions.bloaty.misc.wci.api.frontend.tokens;
 
-public enum CommonRawTokenTypes implements TokenType.Raw {
+public enum CommonRawTokenType implements TokenType.Raw {
 
     EOF(false, true, true),
     PARSEABLE(true, false, false);
@@ -9,7 +9,7 @@ public enum CommonRawTokenTypes implements TokenType.Raw {
     private boolean isIgnorable;
     private boolean isTypographic;
 
-    CommonRawTokenTypes(boolean isSemantic, boolean isIgnorable, boolean isTypographic) {
+    CommonRawTokenType(boolean isSemantic, boolean isIgnorable, boolean isTypographic) {
         this.isSemantic = isSemantic;
         this.isIgnorable = isIgnorable;
         this.isTypographic = isTypographic;

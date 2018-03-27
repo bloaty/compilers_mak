@@ -21,7 +21,7 @@ public class TopDownPascalParser extends SourceParser {
         long startTime = System.currentTimeMillis();
 
         for (rawToken = nextToken();
-             rawToken.getType() != CommonRawTokenTypes.EOF;
+             rawToken.getType() != CommonRawTokenType.EOF;
              rawToken = nextToken()) {
             /* do something */
         }

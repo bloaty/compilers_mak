@@ -1,10 +1,14 @@
 package solutions.bloaty.misc.wci.impl.pascal.frontend;
 
+import java.io.IOException;
+
 import solutions.bloaty.misc.wci.api.frontend.Source;
 import solutions.bloaty.misc.wci.api.frontend.SourceScanner;
-import solutions.bloaty.misc.wci.api.frontend.tokens.*;
-
-import java.io.IOException;
+import solutions.bloaty.misc.wci.api.frontend.tokens.CommonRawTokenType;
+import solutions.bloaty.misc.wci.api.frontend.tokens.EOFToken;
+import solutions.bloaty.misc.wci.api.frontend.tokens.RawToken;
+import solutions.bloaty.misc.wci.api.frontend.tokens.TokenType;
+import solutions.bloaty.misc.wci.api.frontend.tokens.Tokenizer;
 
 public class PascalScanner extends SourceScanner {
 
@@ -15,22 +19,22 @@ public class PascalScanner extends SourceScanner {
     private static final class PascalTokenizer implements Tokenizer {
 
         @Override
-        public RawToken extract(Source source) throws IOException {
+        public RawToken<TokenType.Raw> extract(Source source) throws IOException {
             char c = source.currentChar();
             int lineNumber = source.lineNumber();
             int linePosition = source.currentPosition();
             if (c == Source.EOF) {
                 return EOFToken.at(source, lineNumber, linePosition);
             }
-            return new RawToken() {
+            return new RawToken<TokenType.Raw>() {
                 @Override
                 public char[] getChars() {
                     return new char[] {c};
                 }
 
                 @Override
-                public TokenType getType() {
-                    return CommonRawTokenTypes.PARSEABLE;
+                public TokenType.Raw getType() {
+                    return CommonRawTokenType.PARSEABLE;
                 }
 
                 @Override

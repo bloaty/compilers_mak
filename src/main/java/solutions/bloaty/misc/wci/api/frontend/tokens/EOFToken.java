@@ -42,7 +42,7 @@ public final class EOFToken implements RawToken<TokenType.Raw> {
 
     @Override
     public TokenType.Raw getType() {
-        return CommonRawTokenTypes.EOF;
+        return CommonRawTokenType.EOF;
     }
 
 }
